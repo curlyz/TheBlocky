@@ -83,7 +83,7 @@ def AddTask (function,name=None,mode='repeat',period=100,priority=10):
 	Task = [priority,ticks_us()+period,function,name,period,mode]
 	TimerStack.append(Task)
 	TimerStack.sort()
-	return "[AddTask]>>> OK"
+
 	
 def DeleteTask(name=None):
 	for i in range(len(TimerStack)):

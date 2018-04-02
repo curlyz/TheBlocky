@@ -84,29 +84,35 @@ def AddTask (function,name=None,mode='repeat',period=100,priority=10):
 	TimerStack.append(Task)
 	TimerStack.sort()
 	return "[AddTask]>>> OK"
+	
 def DeleteTask(name=None):
 	for i in range(len(TimerStack)):
 		if TimerStack[i-1][3]==name :
 			TimerStack.pop(i-1)
 			break
+			
 def PauseTask(name=None):
 	for i in range(len(TimerStack)):
 		if TimerStack[i-1][3]==name:
 			TimerStack[i-1][1]=0 # nextime = 0 mean paused
 			break
+			
 def ResumeTask(name=None):
 	for i in range(len(TimerStack)):
 		if TimerStack[i-1][3]==name:
 			TimerStack[i-1][1] = ticks_us() 
 			break 
+			
 def PauseAllTask(priority = 1):
 	for i in range ( len( TimerStack)):
 		if TimerStack[i-1][0] > priority:
 			TimerStack[i-1][1] = 0
+			
 def ResumeAllTask(priority = 10):
 	for i in range ( len( TimerStack)):
 		if TimerStack[i-1][0] < priority:
 			TimerStack[i-1][1] = ticks_us()
+			
 def DeleteAllTask(priority=1):
 	return NotImplementedError
 			

@@ -79,25 +79,25 @@ class Blocky:
 		userPrefix = self.config['auth_key'] + '/user/'
 		if self.topic.startswith(sysPrefix):
 			if self.topic == sysPrefix + 'ota':
-			print('Receive OTA message')
-			f = open('user_code.py', 'w')
-			f.write(self.msg)
-			f.close()
-			otaAckMsg = {'chipId': CHIP_ID, 'event': 'ota_ack'}		
-			self.mqtt.publish(topic=self.config['auth_key'] + '/sys/', msg=ujson.dumps(otaAckMsg))
-			time.sleep_ms(500)
-			machine.reset()
+				print('Receive OTA message')
+				f = open('user_code.py', 'w')
+				f.write(self.msg)
+				f.close()
+				otaAckMsg = {'chipId': CHIP_ID, 'event': 'ota_ack'}		
+				self.mqtt.publish(topic=self.config['auth_key'] + '/sys/', msg=ujson.dumps(otaAckMsg))
+				time.sleep_ms(500)
+				machine.reset()
 			elif self.topic == sysPrefix + 'run':
-			print('Receive RUN message')
-			exec(self.msg, globals())
+				print('Receive RUN message')
+				exec(self.msg, globals())
 			
 			elif self.topic == sysPrefix + 'reboot':
-			print('Receive REBOOT message')
-			machine.reset()
+				print('Receive REBOOT message')
+				machine.reset()
 			elif self.topic == sysPrefix + 'upload':
-			print('Receive UPLOAD message')
+				print('Receive UPLOAD message')
 			elif self.topic == sysPrefix + 'upgrade':
-			print('Receive UPGRADE message')
+				print('Receive UPGRADE message')
 		elif self.topic.startswith(userPrefix):
 			for t in self.message_handlers:
 			format_topic = t.replace('/+', '/[a-zA-Z0-9_]+')
